@@ -1,0 +1,209 @@
+Test Cases for cracker.php (Backend)
+Test Database Connection
+
+Objective: Ensure that the PHP script can successfully connect to the MySQL database.
+
+Steps:
+
+Run the cracker.php file.
+
+Expected Result: The script should not throw any database connection errors. A successful connection should allow fetching hashed passwords.
+
+Test Hashing Function
+
+Objective: Verify that the salter() function correctly generates the salted MD5 hash for given strings.
+
+Test Data:
+
+Input: "password"
+
+Expected Output: A hashed string (MD5) that matches the salted version of the input.
+
+Steps:
+
+Run the salter() function with the input "password".
+
+Expected Result: The returned hash should match the expected salted hash value.
+
+Test Cracking Functionality with Easy Password
+
+Objective: Ensure that the application can correctly identify and categorize "Easy" passwords (e.g., numeric passwords like 12345).
+
+Test Data:
+
+Input: "12345" (hashed version)
+
+Expected Output: Password is categorized under Easy.
+
+Steps:
+
+Add a record with a hashed password (MD5) of 12345 in the not_so_smart_users table.
+
+Run cracker.php.
+
+Expected Result: The password 12345 should be categorized as Easy and appear in the Easy list in the JSON output.
+
+Test Cracking Functionality with Medium Password Type 1 (3 Uppercase + 1 Digit)
+
+Objective: Ensure that passwords of type "Medium_Type1" (3 uppercase letters + 1 digit, e.g., FMS8) are correctly categorized.
+
+Test Data:
+
+Input: "FMS8" (hashed version)
+
+Expected Output: Password is categorized under Medium_Type1.
+
+Steps:
+
+Add a record with a hashed password (MD5) of FMS8 in the not_so_smart_users table.
+
+Run cracker.php.
+
+Expected Result: The password FMS8 should be categorized as Medium_Type1 and appear in the Medium_Type1 list in the JSON output.
+
+Test Cracking Functionality with Medium Password Type 2 (Dictionary Words with Max 6 Characters)
+
+Objective: Ensure that dictionary words with a maximum of 6 characters are categorized as Medium_Type2.
+
+Test Data:
+
+Input: "monkey" (hashed version)
+
+Expected Output: Password is categorized under Medium_Type2.
+
+Steps:
+
+Add a record with a hashed password (MD5) of monkey in the not_so_smart_users table.
+
+Ensure that dictionary.txt contains the word "monkey".
+
+Run cracker.php.
+
+Expected Result: The password monkey should be categorized as Medium_Type2 and appear in the Medium_Type2 list in the JSON output.
+
+Test Cracking Functionality with Hard Password
+
+Objective: Ensure that passwords with a mix of uppercase letters, lowercase letters, and numbers (e.g., AbC12z) are categorized as Hard.
+
+Test Data:
+
+Input: "AbC12z" (hashed version)
+
+Expected Output: Password is categorized under Hard.
+
+Steps:
+
+Add a record with a hashed password (MD5) of AbC12z in the not_so_smart_users table.
+
+Run cracker.php.
+
+Expected Result: The password AbC12z should be categorized as Hard and appear in the Hard list in the JSON output.
+
+Test Cache Functionality
+
+Objective: Verify that the caching mechanism works correctly to store cracked passwords.
+
+Steps:
+
+Run cracker.php with some passwords.
+
+Check the cache (hash_cache table) for the presence of cracked passwords.
+
+Expected Result: The cracked passwords should be stored in the cache and retrieved if the same hash appears again.
+
+Test Category Limits (Easy, Medium, Hard)
+
+Objective: Ensure that the categories Easy, Medium, and Hard respect their limit restrictions (e.g., 4 Easy, 12 Medium, 2 Hard).
+
+Steps:
+
+Add multiple passwords with different difficulty levels.
+
+Run cracker.php.
+
+Expected Result: The number of cracked passwords in each category should not exceed the predefined limit (4 Easy, 12 Medium, and 2 Hard).
+
+Test No Password Found
+
+Objective: Ensure that when no password matches, the script doesn’t crash and returns an empty result.
+
+Steps:
+
+Run cracker.php without any matching passwords in the database.
+
+Expected Result: The script should return empty categories for all levels (Easy, Medium, Hard).
+
+
+
+Test Cases for index.html (Frontend)
+Test Display of Cracked Passwords
+
+Objective: Ensure that the frontend correctly displays the cracked passwords in their respective categories.
+
+Steps:
+
+Open index.html in the browser.
+
+Run the backend (make sure cracker.php has been executed and data is available).
+
+Expected Result: The frontend should display the passwords in the Easy, Medium, and Hard sections.
+
+Test Category Visibility
+
+Objective: Ensure that the cracked passwords are correctly categorized and visible under each category.
+
+Steps:
+
+Open index.html and check if the cracked passwords are listed under the correct headings (Easy, Medium, Hard).
+
+Expected Result: Passwords should be listed under their respective categories, and no passwords should be misplaced.
+
+Test Loading Time
+
+Objective: Ensure that the page loads within an acceptable time frame and that it doesn’t hang indefinitely while waiting for results.
+
+Steps:
+
+Open index.html and wait for the cracked passwords to appear.
+
+Expected Result: The page should load quickly and display the results within a few seconds.
+
+Test Dynamic Updates (jQuery)
+
+Objective: Ensure that jQuery correctly interacts with the backend and dynamically updates the password categories.
+
+Steps:
+
+Open index.html.
+
+Trigger the cracking process and verify that the password categories are updated dynamically.
+
+Expected Result: Password categories should dynamically populate without reloading the page.
+
+
+
+Additional Tests
+Test Edge Case: Empty Password
+
+Objective: Verify how the system handles an empty password string.
+
+Steps:
+
+Add an empty password record to the database.
+
+Run cracker.php.
+
+Expected Result: The empty password should be skipped and not categorized.
+
+Test Edge Case: Password Length Greater than 6
+
+Objective: Verify how passwords with more than 6 characters (e.g., longpassword) are categorized.
+
+Steps:
+
+Add a password with more than 6 characters to the database.
+
+Run cracker.php.
+
+Expected Result: The password should not be categorized under Medium (which only accepts passwords with max 6 characters).
+
