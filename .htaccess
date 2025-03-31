@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Block direct access to cracker.php unless it's an AJAX request
+RewriteCond %{REQUEST_URI} /cracker\.php$ [NC]
+RewriteCond %{HTTP:X-Requested-With} !XMLHttpRequest [NC]
+RewriteRule ^ - [F]
+
+# Block direct access to the config folder
+RewriteRule ^config(/|$) - [F,NC]
+
+# Ensure index.html is the default page
+DirectoryIndex index.html
