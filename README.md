@@ -116,6 +116,11 @@ The cracked passwords will be stored in the cache and categorized as shown in th
 }
 ```
 
+### 6. For Development
+
+Please follow the deployment process file that is documented separately.
+
 ---
 
 This guide ensures you can set up, run, and test the Password Cracker Tool efficiently. If you encounter any issues, ensure that your Apache, PHP, and MySQL configurations are correctly set up.
+
