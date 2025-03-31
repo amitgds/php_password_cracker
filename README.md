@@ -49,7 +49,7 @@ Ensure the cracker.php file is placed in your Apache's htdocs directory (or the 
 
 Modify the config/db.php file to reflect your database credentials:
 
-<?php
+php code
 $host = 'localhost'; 
 $dbname = 'cracker';
 $username = 'root';
@@ -87,7 +87,7 @@ The cracked passwords will be stored in the cache and categorized as shown in th
 
 Example Response
 
-{
+"{
     "Easy": [
         {"id": 1, "password": "12345"},
         {"id": 2, "password": "23456"}
@@ -100,5 +100,5 @@ Example Response
         {"id": 5, "password": "aBcD123"},
         {"id": 6, "password": "L0ndon!5"}
     ]
-}
+}"
 
