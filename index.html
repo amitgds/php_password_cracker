@@ -42,7 +42,7 @@
         $(document).ready(function () {
             $("#startCracking").click(function () {
                 $(this).prop("disabled", true).text("Cracking...");
-                $.get("http://localhost/cracker/backend/cracker.php", function (data) {
+                $.get("cracker.php", function (data) {
                     try {
                         let results = JSON.parse(data);
 
