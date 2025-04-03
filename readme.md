@@ -153,4 +153,3 @@ Run the SQL commands as mentioned in step 4.
 - **Customization**: Replace `your-username` with your GitHub username and add a `LICENSE` file if desired.
 - **GitHub Integration**: If hosted on GitHub, add a `.gitignore` file to exclude `.env`, `vendor/`, and `hash_cache.db`.
 - **Documentation**: The README assumes the code is functional as provided. If you encounter issues, update the "Troubleshooting" section accordingly.
-
